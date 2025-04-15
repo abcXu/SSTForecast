@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="924a742d-f594-4a39-84bd-c0744fc4c15f" name="autoDL">
+        <fileTransfer rootFolder="/root/autodl-tmp/SeaSurfaceForecast" accessType="SFTP" host="connect.nmb1.seetacloud.com" port="24571" sshConfigId="8aef9163-51d0-4b94-9ed1-5cb1d7dad3f2" sshConfig="root@connect.nmb1.seetacloud.com:24571 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="17a3820b-69bf-4c28-ab41-5c5a8fe0fde6" name="autoDL4090">
+        <fileTransfer rootFolder="/root/autodl-tmp/SeaSurfaceForecast" accessType="SFTP" host="connect.nmb1.seetacloud.com" port="24571" sshConfigId="8aef9163-51d0-4b94-9ed1-5cb1d7dad3f2" sshConfig="root@connect.nmb1.seetacloud.com:24571 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
