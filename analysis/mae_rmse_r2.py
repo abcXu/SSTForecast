@@ -1,8 +1,8 @@
 import numpy as np
 import os
 model_name = 'SSTPredictor'
-data_path_true = f'D:/Datasets/result/20250414/reverse_true_sst_{model_name}_SCS.npy'
-data_path_pred = f'D:/Datasets/result/20250414/reverse_pred_sst_{model_name}_SCS.npy'
+data_path_true = f'D:/Datasets/result/20250506/reversed/reverse_true_sst_{model_name}_mlp_SCS.npy'
+data_path_pred = f'D:/Datasets/result/20250506/reversed/reverse_pred_sst_{model_name}_mlp_SCS.npy'
 mask_path = 'D:/GraduationThesis/codes/preData/maskLand=0.npy'
 def read_npy(file_path):
     return np.load(file_path)
@@ -83,5 +83,5 @@ def calculate(true_file_path, pred_file_path, mask_file_path, output_file_path):
 # mask文件：（64,64）；
 # output_file_path：结果输出打印的文件.txt格式
 calculate(data_path_true,
-                   data_path_pred, mask_path,
-                  'results.txt')
+          data_path_pred, mask_path,
+          'texts/results_mlp_new.txt')

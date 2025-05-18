@@ -1,8 +1,11 @@
 import numpy as np
 from sklearn.metrics import r2_score
 
-pred_path = "../模型结果/DatLSTM/20240701/reverse_pred_DatLSTM_BoHai_sst.npy"
-true_path = "../模型结果/DatLSTM/20240701/reverse_true_DatLSTM_BoHai_sst.npy"
+# pred_path = "../模型结果/DatLSTM/20240701/reverse_pred_DatLSTM_BoHai_sst.npy"
+# true_path = "../模型结果/DatLSTM/20240701/reverse_true_DatLSTM_BoHai_sst.npy"
+
+pred_path = "D:/Datasets/result/20250415/reversed/reverse_pred_sst_SSTPredictor_mlp_SCS.npy"
+true_path = "D:/Datasets/result/20250415/reversed/reverse_true_sst_SSTPredictor_mlp_SCS.npy"
 
 # 加载真实数据和预测数据
 true_data = np.load(true_path)
@@ -82,11 +85,11 @@ for i in range(H):
     for j in range(W):
         count = 0
         for k in range(T):
-            if r2_matrix[k, i, j] >= 0.986 and rmse_matrix[k, i, j] <= 1.05:
+            if r2_matrix[k, i, j] >= 0.88 and rmse_matrix[k, i, j] <= 0.7:
                 count += 1
         results[i, j] = count
 
 print(results)
 print(results.shape)
 # 保存结果
-np.save("new_R2_0.95&RMSE_0.65.matrix.npy", results)
+np.save("npys/new_R2_0.88&RMSE_0.7.matrix.npy", results)

@@ -4,13 +4,14 @@ from configs import get_args
 from functions import train, valid
 from torch.utils.data import DataLoader
 from data_provider.data_loader import SCSDataset
-from models.SSTPM import SSTPredictor
+from models.SSTPMnew import SSTPredictor
 from utils.utils import *
 
 def setup(args):
 
     if args.model == 'SSTPredictor':
-        model = SSTPredictor().to(args.device)
+        model = SSTPredictor(input_dim=args.input_channels,hidden_dim=args.hidden_dim, d_model=args.d_model,\
+                             nhead=args.nhead, in_len=args.num_frames_input,pred_len=args.num_frames_output, fusion_mode=args.fusion_mode).to(args.device)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
 
     criterion = nn.MSELoss()
@@ -43,7 +44,7 @@ def main():
     train_losses, valid_losses = [], []
 
     best_metric = (0, float('inf'), float('inf'))
-
+    print("_____________________training________________________")
     for epoch in range(args.epochs):
         # 记录开始时间
         start_time = time.time()

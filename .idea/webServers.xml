@@ -3,14 +3,42 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="924a742d-f594-4a39-84bd-c0744fc4c15f" name="autoDL">
-        <fileTransfer rootFolder="/root/autodl-tmp/SeaSurfaceForecast" accessType="SFTP" host="connect.nmb1.seetacloud.com" port="24571" sshConfigId="8aef9163-51d0-4b94-9ed1-5cb1d7dad3f2" sshConfig="root@connect.nmb1.seetacloud.com:24571 password">
+        <fileTransfer rootFolder="/root/autodl-tmp/SeaSurfaceForecast" accessType="SFTP" host="connect.nmb1.seetacloud.com" port="40856" sshConfigId="8aef9163-51d0-4b94-9ed1-5cb1d7dad3f2" sshConfig="root@connect.nmb1.seetacloud.com:40856 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
         </fileTransfer>
       </webServer>
       <webServer id="17a3820b-69bf-4c28-ab41-5c5a8fe0fde6" name="autoDL4090">
-        <fileTransfer rootFolder="/root/autodl-tmp/SeaSurfaceForecast" accessType="SFTP" host="connect.nmb1.seetacloud.com" port="24571" sshConfigId="8aef9163-51d0-4b94-9ed1-5cb1d7dad3f2" sshConfig="root@connect.nmb1.seetacloud.com:24571 password">
+        <fileTransfer rootFolder="/root/autodl-tmp/SeaSurfaceForecast" accessType="SFTP" host="connect.nmb1.seetacloud.com" port="40856" sshConfigId="8aef9163-51d0-4b94-9ed1-5cb1d7dad3f2" sshConfig="root@connect.nmb1.seetacloud.com:40856 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="e9949504-3fb5-4558-af34-0f90f79f188d" name="autoDL4090-009">
+        <fileTransfer rootFolder="/root/autodl-tmp/SeaSurfaceForecast" accessType="SFTP" host="connect.nmb1.seetacloud.com" port="40856" sshConfigId="8aef9163-51d0-4b94-9ed1-5cb1d7dad3f2" sshConfig="root@connect.nmb1.seetacloud.com:40856 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="73f4d7cc-31ea-4e98-ac1e-94a910212632" name="autoDL4090-108">
+        <fileTransfer rootFolder="/root/autodl-tmp/SeaSurfaceForecast" accessType="SFTP" host="connect.nmb1.seetacloud.com" port="40856" sshConfigId="8aef9163-51d0-4b94-9ed1-5cb1d7dad3f2" sshConfig="root@connect.nmb1.seetacloud.com:40856 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="29ed1f98-0ef6-4922-8739-578ed9136cda" name="autoDL-116">
+        <fileTransfer rootFolder="/root/autodl-tmp/SeaSurfaceForecast" accessType="SFTP" host="connect.nmb1.seetacloud.com" port="40856" sshConfigId="8aef9163-51d0-4b94-9ed1-5cb1d7dad3f2" sshConfig="root@connect.nmb1.seetacloud.com:40856 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="3d9d5960-3f6b-4c8c-820e-e7471a4b2fd5" name="autoDL-005">
+        <fileTransfer rootFolder="/root/autodl-tmp/SeaSurfaceForecast" accessType="SFTP" host="connect.nmb1.seetacloud.com" port="40856" sshConfigId="8aef9163-51d0-4b94-9ed1-5cb1d7dad3f2" sshConfig="root@connect.nmb1.seetacloud.com:40856 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

@@ -17,7 +17,7 @@ def train(args, logger, epoch, model, train_loader, criterion, optimizer):
 
     for batch_idx, (inputs_sst,targets_sst,inputs_ssh,targets_ssh) in enumerate(train_loader):
         optimizer.zero_grad()
-        # inputs / targets :[8, 10, 1, 64, 64]
+        # inputs / targets :[b, T, C, H, W]
         inputs_sst,targets_sst,inputs_ssh,targets_ssh = map(lambda x: x.float().to(args.device), [inputs_sst,targets_sst,inputs_ssh,targets_ssh])
 
         assert targets_sst.shape[1] == targets_ssh.shape[1],\
@@ -91,6 +91,7 @@ def test(args, logger, epoch, model, test_loader, criterion, cache_dir):
 
             if args.model == 'SSTPredictor':
                 outputs_sst = model(inputs_sst,inputs_ssh)
+                # outputs_sst = model(inputs_sst)
             # 记录sst的loss
             losses_sst.append(criterion(outputs_sst, targets_sst).item())
             assert inputs_sst.shape[1]== inputs_ssh.shape[1],\
@@ -131,6 +132,7 @@ def test(args, logger, epoch, model, test_loader, criterion, cache_dir):
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     # 保存真实数据以及预测数据
+    print("Saved data path: ",save_path + f"normalized_true_sst_{args.model}_SCS.npy")
     np.save(
         save_path + f"normalized_true_sst_{args.model}_SCS.npy",
         true_array_sst)

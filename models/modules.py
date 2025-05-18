@@ -2,80 +2,6 @@ import torch
 from torch import nn
 import numpy as np
 from torch.nn import init
-class BasicConv2d(nn.Module):
-    def __init__(self,in_channels,out_channels,kernel_size,stride,padding,transpose=False,act_norm=False):
-        super(BasicConv2d, self).__init__()
-        self.act_norm = act_norm
-        if not transpose:
-            self.conv = nn.Conv2d(in_channels,out_channels,kernel_size=kernel_size,stride=stride,padding=padding)
-        else:
-            self.conv = nn.ConvTranspose2d(in_channels,out_channels,kernel_size=kernel_size,stride=stride,padding=padding,output_padding=stride//2)
-        self.norm = nn.GroupNorm(2,out_channels)
-        self.act = nn.LeakyReLU(0.2,inplace=True)
-
-    def forward(self,x):
-        x = self.conv(x)
-        if self.act_norm:
-            x=self.act(self.norm(x))
-        return x
-class ConvSC(nn.Module):
-    def __init__(self,C_in,C_out,stride,transpose=False,act_norm=True):
-        super(ConvSC, self).__init__()
-        if stride==1:
-            transpose = False
-        self.conv = BasicConv2d(C_in,C_out,kernel_size=3,stride=stride,padding=1,
-                                transpose=transpose,act_norm=act_norm)
-    def forward(self,x):
-        return self.conv(x)
-
-
-class GroupConv2d(nn.Module):
-    def __init__(self,in_channels, out_channels, kernel_size, stride, padding, groups, act_norm=False):
-        super(GroupConv2d,self).__init__()
-        self.act_norm = act_norm
-        if in_channels % groups != 0:
-            groups = 1   # 不能恰好分组
-
-        self.conv = nn.Conv2d(in_channels,out_channels,kernel_size=kernel_size,stride=stride,
-                              padding=padding,groups=groups)
-        self.norm = nn.GroupNorm(groups,out_channels)
-        self.act = nn.LeakyReLU(0.2,inplace=True)
-
-    def forward(self,x):
-        x = self.conv(x)
-        if self.act_norm:
-            x = self.act(self.norm(x))
-        return x
-
-class Inception(nn.Module):
-    def __init__(self,in_C,hid_C,out_C,incep_ker=[3,5,7,11], groups=8):
-        super(Inception,self).__init__()
-        self.conv1 = nn.Conv2d(in_C,hid_C,kernel_size=1,stride=1,padding=0)
-        layers = []
-        for ker in incep_ker:
-            layers.append(GroupConv2d(hid_C,out_C,kernel_size=ker,stride=1,padding=ker//2,groups=groups,act_norm=True))
-
-        self.layers = nn.Sequential(*layers)
-
-    def forward(self,x):
-        x = self.conv1(x)
-        y = 0
-        for layer in self.layers:
-            y += layer(x)
-
-        return y
-
-
-class SingleModeEncoder(nn.Module):
-    def __init__(self, feature_dim=1024, num_layers=2, num_heads=8):
-        super(SingleModeEncoder, self).__init__()
-        encoder_layer = nn.TransformerEncoderLayer(d_model=feature_dim, nhead=num_heads)
-        self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
-
-    def forward(self, x):
-        # x 形状：(time, batch, feature_dim)
-        out = self.transformer_encoder(x)
-        return out
 
 class MultiheadAttention(nn.Module):
     def __init__(self, d_model, d_k, d_v, h, dropout=.1):
@@ -179,13 +105,36 @@ class GRU2d(nn.Module):
         h = torch.nan_to_num(h)
         return h
 
+class CrossAttentionBlock(nn.Module):
+    def __init__(self, d_model, nhead):
+        super().__init__()
+        self.attn = nn.MultiheadAttention(d_model, nhead, batch_first=True)
+        self.norm = nn.LayerNorm(d_model)
+
+    def forward(self, query, key, value):
+        attn_output, _ = self.attn(query, key, value)
+        return self.norm(query + attn_output)
+
+
+class SEBlock(nn.Module):
+    def __init__(self, channel, reduction=8):
+        super().__init__()
+        self.fc = nn.Sequential(
+            nn.AdaptiveAvgPool2d(1),
+            nn.Conv2d(channel, channel // reduction, 1),
+            nn.ReLU(),
+            nn.Conv2d(channel // reduction, channel // 2, 1),  # 修改通道数回到原始的 d_model
+            nn.Sigmoid()
+        )
+
+    def forward(self, x1, x2):
+        combined = torch.cat([x1, x2], dim=1)
+        weight = self.fc(combined)
+        return x1 * weight + x2 * (1 - weight)
+
 if __name__ == '__main__':
-    import torch
     x = torch.randn(10,1,64,64)
-    inception = Inception(1,64,64)
-    print(inception)
-    print(inception(x).shape)
-    single_mode_encoder = SingleModeEncoder()
-    print(single_mode_encoder)
+
+
 
 

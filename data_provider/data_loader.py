@@ -4,13 +4,13 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset
 # data_path = 'D:/GraduationThesis/codes/preData/part_data'
-data_path = '../data/all_data'
+# data_path = './data/all_data'
 class SCSDataset(Dataset):
     def __init__(self,args,split):
         self.args = args
         self.split = split
-        # self.data_path = args.data_path
-        self.data_path = data_path
+        self.data_path = args.data_path
+        # self.data_path = data_path
         self.sst_X_name = 'sst_X.npy'
         self.sst_Y_name = 'sst_Y.npy'
         self.ssh_X_name = 'ssh_X.npy'
@@ -57,13 +57,13 @@ class SCSDataset(Dataset):
 
 if __name__ == '__main__':
     args = {
-        'data_path':data_path,
+        'data_path':'./data/all_data',
         'sst_X_name':'sst_X.npy',
         'sst_Y_name':'sst_Y.npy',
         'ssh_X_name':'ssh_X.npy',
         'ssh_Y_name':'ssh_Y.npy',
         'split':'train'
     }
-    train_set = SCSDataset(args,args['split'])
+    # train_set = SCSDataset(args,args['split'])
     test_set = SCSDataset(args,'test')
-    valid_set = SCSDataset(args,'valid')
+    # valid_set = SCSDataset(args,'valid')

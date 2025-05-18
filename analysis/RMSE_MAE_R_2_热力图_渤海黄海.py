@@ -6,8 +6,8 @@ from sklearn import metrics
 # name_list = ['ConvLSTM', 'PredRNN', 'TCTN', 'MoDeRNN', 'PhyDNet', 'SimVP', 'ACFN', 'DSTFN']
 
 # name_list = ['ConvLSTM','PredRNN','TCTN','SwinLSTM','DatLSTM']
-name_list = ['PredRNN']
-
+# name_list = ['PredRNN']
+name_list = ['STTPM']
 def MAE(pred, true, day):
     #加载某一天的所有数据
     pred = pred[:, day, ...].reshape(-1, 64, 64)
@@ -47,7 +47,8 @@ mae_list_day = []
 rmse_list_day = []
 r_2_list_day = []
 
-path = 'D:/Study/PredRNN/'
+# path = 'D:/Study/PredRNN/'
+path = 'D:/Datasets/result/20250415/reversed/'
 for day in range(0, 10):
     mae_list_name = []
     rmse_list_name  = []
@@ -60,11 +61,13 @@ for day in range(0, 10):
         # 加载逆归一化的数据
         # pred = np.load(path + name +'/20240701/reverse_pred_'+name+'_BoHai_sst.npy')
         # true = np.load(path + name +'/20240701/reverse_true_'+name+'_BoHai_sst.npy')
-        pred_R = np.load(path + name + '/reverse_pred.npy')
-        true_R = np.load(path + name + '/reverse_true.npy')
+        # pred_R = np.load(path + name + '/reverse_pred.npy')
+        # true_R = np.load(path + name + '/reverse_true.npy')
+        true_R = np.load(path + '/reverse_true_sst_SSTPredictor_mlp_SCS.npy')
+        pred_R = np.load(path + '/reverse_pred_sst_SSTPredictor_mlp_SCS.npy')
         # pred = np.load('./PredRNN/reverse_pred.npy')
         # true = np.load('./PredRNN/reverse_true.npy')
-        if name == 'ConvLSTM':
+        if name == 'STTPM':
             true_R = true_R[:, ::-1, :, :]
             pred_R = pred_R[:, ::-1, :, :]
             pred = pred[:, ::-1, :, :]
@@ -83,15 +86,17 @@ for day in range(0, 10):
     rmse_list_day.append(rmse_list_name)
     r_2_list_day.append(r_2_list_name)
 
+save_path = 'D:/Datasets/result/20250415/metrics/'
+# np.save('D:/Study/PredRNN/days_names_rmse.npy', rmse_list_day)
+# np.save('D:/Study/PredRNN/days_names_mae.npy', mae_list_day)
+# np.save('D:/Study/PredRNN/days_names_r_2.npy', r_2_list_day)
+np.save(save_path + 'days_names_rmse.npy', rmse_list_day)
+np.save(save_path + 'days_names_mae.npy', mae_list_day)
+np.save(save_path + 'days_names_r_2.npy', r_2_list_day)
 
-np.save('D:/Study/PredRNN/days_names_rmse.npy', rmse_list_day)
-np.save('D:/Study/PredRNN/days_names_mae.npy', mae_list_day)
-np.save('D:/Study/PredRNN/days_names_r_2.npy', r_2_list_day)
-
-
-rmse= np.load('D:/Study/PredRNN/days_names_rmse.npy')
-mae= np.load('D:/Study/PredRNN/days_names_mae.npy')
-r_2 = np.load('D:/Study/PredRNN/days_names_r_2.npy')
+rmse= np.load(save_path+'days_names_rmse.npy')
+mae= np.load(save_path+'days_names_mae.npy')
+r_2 = np.load(save_path+'days_names_r_2.npy')
 
 
 

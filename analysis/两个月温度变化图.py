@@ -32,10 +32,14 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
 
 # 加载npy文件，需将文件名替换为实际的文件名
-data = np.load('D:/Study\模型结果/DatLSTM/20240701/reverse_true_DatLSTM_BoHai_sst.npy')
-
+# data = np.load('D:/Study\模型结果/DatLSTM/20240701/reverse_true_DatLSTM_BoHai_sst.npy')
+# data = np.load('D:/Datasets/result/20250415/reversed/reverse_true_sst_SSTPredictor_mlp_SCS.npy')
+# data = np.load('D:/GraduationThesis/codes/preData/all_data/sst_X.npy').squeeze()
+data = np.load('D:/Datasets/result/20250415/reversed/reverse_true_sst_SSTPredictor_mlp_SCS.npy ')
 # 假设（30, 30）为64x64空间维度中的坐标索引
 x_index, y_index = 30, 30
 

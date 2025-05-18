@@ -1,16 +1,13 @@
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-from dateutil.relativedelta import relativedelta
 import pandas as pd
 import numpy as np
 import matplotlib.dates as mdates
 from datetime import datetime
 
-path = "F:/实验数据(考虑瑞年_何老师)/experiment_result/ACFN/reverse/"
+path = "D:/Datasets/result/20250415/reversed/"
 dates = pd.date_range(start='2016-01-01', end='2020-12-31', freq='D')
-true = np.load(path+'reverse_true_ACFN_Bohai_sst.npy').reshape(-1,10,64,64)
-pred = np.load(path+'reverse_pred_ACFN_Bohai_sst.npy').reshape(-1,10,64,64)
-
+true = np.load(path+'reverse_true_sst_SSTPredictor_mlp_SCS.npy').reshape(-1,10,64,64)
+pred = np.load(path+'reverse_pred_sst_SSTPredictor_mlp_SCS.npy').reshape(-1,10,64,64)
 
 # 创建五个子图，共享x轴
 fig, axs = plt.subplots(10, 1, figsize=(20, 30), sharex=True)
@@ -18,9 +15,10 @@ fig, axs = plt.subplots(10, 1, figsize=(20, 30), sharex=True)
 start_date = dates.min()
 end_date = dates.max()
 for i in range(10):
-    true_values = true[734:2561, i, 42, 42]  # 假设有5组数据，每个子图一个
-    predicted_values = pred[734:2561, i, 42, 42]
-
+    true_values = true[213:, i, 42, 42]  # 假设有5组数据，每个子图一个
+    predicted_values = pred[213:, i, 42, 42]
+    print("len_true:", true_values.shape)
+    print("len_pred:", predicted_values.shape)
     # 数据整理到DataFrame
     data = pd.DataFrame({
         "Date": dates,
@@ -124,5 +122,5 @@ ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
 
 # 自动调整子图布局
 plt.tight_layout()
-plt.savefig('D:/PythonProject/aos2023_sic_bs/大论文代码/图片/Daily-Monthly-RMSE_L1.png', format='png', dpi=300, bbox_inches='tight', pad_inches=0.1)
+plt.savefig('./pictures/Daily-Monthly-RMSE_L1.png', format='png', dpi=300, bbox_inches='tight', pad_inches=0.1)
 plt.show()
