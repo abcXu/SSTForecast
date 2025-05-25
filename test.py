@@ -16,10 +16,6 @@ if __name__ == '__main__':
     logger = init_logger(log_dir)
 
     # 初始化模型
-    # model = SSTPredictor(input_dim=args.input_channels, hidden_dim=args.hidden_dim, d_model=args.d_model,\
-    #                      nhead=args.nhead,in_len=args.num_frames_input,pred_len=args.num_frames_output, fusion_mode=args.fusion_mode).to(args.device)
-    # model = SSTPredictorNoCA(input_dim=args.input_channels, hidden_dim=args.hidden_dim, d_model=args.d_model,\
-    #                  in_len=args.num_frames_input,pred_len=args.num_frames_output).to(args.device)
     model = SSTPredictor(input_dim=args.input_channels, hidden_dim=args.hidden_dim, d_model=args.d_model, nhead=args.nhead, pred_len=args.num_frames_output, fusion_mode="mlp").to(args.device)
     criterion = nn.MSELoss()
 

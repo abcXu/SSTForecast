@@ -4,7 +4,7 @@ from configs import get_args
 from functions import train, valid
 from torch.utils.data import DataLoader
 from data_provider.data_loader import SCSDataset
-from models.SSTPMnew import SSTPredictor
+from models.SSTPM import SSTPredictor
 from utils.utils import *
 
 def setup(args):
