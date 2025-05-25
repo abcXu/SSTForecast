@@ -29,7 +29,6 @@
 <p align="center">
   <img src="https://gitee.com/xu_yan_peng/picgo-typro/raw/master/image-20250525133445332.png" alt="GRU2D结构" width="600"/>
 </p>
-## 
 
 ## 📈 评估指标
 
